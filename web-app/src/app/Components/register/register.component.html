@@ -1,0 +1,110 @@
+
+<body>
+
+
+<p class="display-2" style="text-align: center; ">Registracija</p>
+<p class="display-2" style="text-align: center; ">Forma : {{registrationForm.valid}}</p>
+
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-10 col-md-8 col-lg-6">
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group col-15">
+      <label for="inputEmail">Email</label>
+      <input formControlName="email" type="text" class="form-control" id="inputEmail" placeholder="Example 123@gmail.com">
+      <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger"> 
+        <div *ngIf="f['email'].errors && f['email'].errors['email']">Unesite email ispravno.</div>
+        Polje ne moze biti prazno
+    </div>
+    </div>
+    <div class="form-group col-15">
+      <label for="inputUsername">Korisnicko ime</label>
+      <input formControlName="username" type="text" class="form-control" id="inputUsername" placeholder="Something like your nickname">
+      <div *ngIf="f['username'].touched && f['username'].invalid" class="alert alert-danger"> 
+        <div *ngIf="f['username'].errors && f['username'].errors['minLength']"></div>
+       Minimalno 6 karaktera
+    </div>
+    </div>
+   
+      <div class="form-group col-15">
+        <label for="inputName">Ime</label>
+        <input formControlName="firstName" placeholder="First Name" type="text" class="form-control" id="inputName">
+        <div *ngIf="f['firstName'].touched && f['firstName'].invalid" class="alert alert-danger"> 
+            <div *ngIf="f['firstName'].errors && f['firstName'].errors['minLength']"></div>
+           Polje ne moze biti prazno
+        </div>
+      </div>
+      <div class="form-group col-15">
+        <label for="inputSurname">Prezime</label>
+        <input formControlName="lastName" placeholder="Second Name" type="text" class="form-control" id="inputSurname">
+        <div *ngIf="f['lastName'].touched && f['lastName'].invalid" class="alert alert-danger"> 
+            <div *ngIf="f['lastName'].errors && f['lastName'].errors['minLength']"></div>
+           Polje ne moze biti prazno
+        </div>
+      </div>
+      <div class="form-group col-15">
+        <label for="inputDate">Datum Rodjenja</label>
+        <input formControlName="date" type="date" class="form-control" id="inputDate">
+      </div>
+    
+    <div class="form-group col-15">
+        <label for="inputAdress">Adresa</label>
+        <input formControlName="address" placeholder="Where do you live?" type="text" class="form-control" id="inputAdress">
+        <div *ngIf="f['address'].touched && f['address'].invalid" class="alert alert-danger"> 
+            <div *ngIf="f['address'].errors && f['address'].errors['minLength']"></div>
+           Polje ne moze biti prazno
+        </div>
+    </div>
+    <div class="form-group col-15">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="korisnik" checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Korisnik
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="dostavljac">
+            <label class="form-check-label" for="exampleRadios2">
+              Dostavljac
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="administrator">
+            <label class="form-check-label" for="exampleRadios3">
+              Administrator
+            </label>
+          </div>
+    </div>
+    <div class="form-group col-15">
+        <label for="inputAdress">Slika</label>
+        <input placeholder="Where do you live?" type="text" class="form-control" id="inputAdress">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="password1">Password</label>
+          <input placeholder="Type your password" formControlName="password1" type="password" class="form-control" id="password1">
+          <div *ngIf="f['password1'].touched && f['password1'].invalid" class="alert alert-danger"> 
+            <div *ngIf="f['password1'].errors && f['password1'].errors['minLength']"></div>
+           Polje ne moze biti prazno
+        </div>
+
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Repeat Password</label>
+          <input placeholder="Match your password" type="password" formControlName="password2" class="form-control" id="password2">
+          <div *ngIf="f['password2'].touched && f['password2'].invalid" class="alert alert-danger"> 
+            <div *ngIf="f['password2'].errors && f['password2'].errors['passwordMismatch']"></div>
+            Ne podudaraju se passwordi
+        </div>
+        </div>
+      </div>
+    <button [disabled]="registrationForm.invalid" type="submit" class="btn btn-primary">Register</button>
+  </form>
+
+</div>
+</div>
+</div>
+
+
+</body>

@@ -1,0 +1,27 @@
+/*
+body{
+    background:
+radial-gradient(black 15%, transparent 16%) 0 0,
+radial-gradient(black 15%, transparent 16%) 8px 8px,
+radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+background-color:#282828;
+background-size:16px 16px;
+}*/
+
+.buttons {
+    width: 960px;
+    margin:0 auto;
+    border-width: 10px;
+    margin-top: 25%;
+    
+    
+  }
+  
+  .action_btn {
+    display: inline-block;
+    padding : auto;
+    width: calc(50% - 4px);
+    margin: auto auto auto auto;
+    
+  }

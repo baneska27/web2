@@ -1,0 +1,50 @@
+
+<p class="display-2" style="text-align: center;">Login</p>
+<div id="content" class="flex">
+    <div class="d-flex justify-content-center">
+        <div class="page-content page-container" id="page-content">
+            <div class="padding">
+                
+
+                <div class="row">
+                    
+                        <div class="card">
+                           
+                            <div class="card-body">
+                                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                                    <div class="form-group">
+                                        <label class="text-muted" for="exampleInputEmail1">Email</label>
+                                        <input formControlName="email" required type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email"> 
+                                        <br>
+                                        <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger"> 
+                                            <div *ngIf="f['email'].errors && f['email'].errors['email']">Unesite email ispravno.</div>
+                                            Polje ne moze biti prazno
+                                        </div>
+                                    </div>
+                                        
+                                       
+
+
+                                    <div class="form-group"><label class="text-muted" for="exampleInputPassword1">Password</label>
+                                        <input formControlName="password" required type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                        <br>
+                                        <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
+                                            <div *ngIf="f['password'].errors && f['password'].errors['required']">Unesite Password.</div>
+                                           
+                                        </div>
+                                    </div>   
+                                        
+                                    
+                                    
+                                        <div class="form-group">
+                                        
+                                    </div> <button [disabled]="loginForm.invalid || loading" type="submit" class="btn btn-primary">
+                                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Login</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
