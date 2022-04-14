@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/Entities/user';
-import { LoginService } from 'src/app/Services/login.service';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { User } from 'src/app/entities/user';
+import { LoginService } from 'src/app/services/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +20,7 @@ export class LoginComponent implements OnInit {
     password : new FormControl('',[Validators.required])
   })
 
-  constructor(private loginService : LoginService) { }
+  constructor(private loginService : LoginService, private toastr : ToastrService,private router : Router) { }
 
   ngOnInit(): void {
   }
@@ -27,7 +30,31 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    this.loginService.loginUser(this.loginForm.get('email')?.value,this.loginForm.get('password')?.value);
+    let subscriber = this.loginService.loginUser(this.loginForm.get('email')?.value,this.loginForm.get('password')?.value);
+
+    subscriber.subscribe({
+      next: (user: any) =>
+      {
+        this.loginService.switchData(user);
+        localStorage.setItem('ime',user.firstName);
+        
+        this.router.navigate(['home/profile']);
+        
+        this.toastr.success('Uspesno ste se ulogovali','Success');
+
+
+  
+      },
+  
+      error: () =>
+      {
+                this.toastr.error('Email/Password netacni','Greska');
+
+      }
+      
+  
+    });
+
   }
 
 }

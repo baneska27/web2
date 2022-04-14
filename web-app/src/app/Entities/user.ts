@@ -7,8 +7,10 @@ export class User {
     secondName : string;
     dateOfBirth : Date;
     slika : string;
+    address : string;
+    verified : boolean;
 
-    constructor(username: string, email: string, password: string, type: string, firstName : string, secondName : string, dateOfBirth : Date, slika : string){
+    constructor(username: string, email: string, password: string, type: string, firstName : string, secondName : string, dateOfBirth : Date, slika : string,address : string, verified : boolean){
         this.username=username;
         this.email=email;
         this.password=password;
@@ -17,5 +19,39 @@ export class User {
         this.secondName = secondName;
         this.slika = slika;
         this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.verified = verified;
+
     }
+
+    
+}
+
+
+export class UserWithoutPass {
+    username: string;
+    email: string;
+    
+    type: string;
+    firstName : string;
+    secondName : string;
+    dateOfBirth : Date;
+    slika : string;
+    address : string;
+    verified : boolean;
+
+    constructor(username: string, email: string, type: string, firstName : string, secondName : string, dateOfBirth : Date, slika : string,address : string, verified : boolean){
+        this.username=username;
+        this.email=email;
+        this.type=type;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.slika = slika;
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.verified = verified;
+
+    }
+
+    
 }

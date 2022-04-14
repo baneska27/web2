@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">DostavaApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a routerLink="/" class="nav-link">Home</a>
+           
+        
+            <span name="ime" *ngIf="userInfo?.type==='adminnnn'">
+                <a routerLink="home/verifikacija" class="nav-link">Verifikacija</a>
+                <a class="nav-link">Sve porudzbine</a>
+                <a class="nav-link">Dodavanje proizvoda</a>
+            </span>
+            
+            <span *ngIf="userInfo?.type==='dostavljac'">
+                <a class="nav-link">Nove porudzbine</a>
+                <a class="nav-link">Moje porudzbine</a>
+                <a class="nav-link">Trenutna porudzbina</a>
+            </span>
+        <span *ngIf="userInfo?.type==='potrosac'">
+            <a class="nav-link">Nova/Trenutna</a>
+            <a class="nav-link">Prethodne porudzbine</a>
+        </span>
+        <a routerLink="/home/profile" class="nav-link -auto">Profil</a>   
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,47 @@
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Ime</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Adresa</th>
+        <th scope="col">D.R.</th>
+        <th scope="col">Tip</th>
+        <th scope="col">Verifikovan</th>
+        <th scope="col">Verifikuj</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <ng-container *ngFor="let user of users;index as i;">
+
+     
+      <tr>
+        <th scope="row">{{i+1}}</th>
+        <td>{{user.firstName}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.address}}</td>
+        <td>{{user.dateOfBirth}}</td>
+        <td>{{user.type}}</td>
+        <td>{{user.verified}}</td>
+        
+        <span *ngIf="!(user.verified)">
+          <td ><button (click)="VerificationRequest(user,true)" type="submit" name="submit" class="btn btn-primary">Verify</button>
+           
+          </td>
+        </span>
+        <span *ngIf="user.verified && user.type==='dostavljac'">
+          <td> <button (click)="VerificationRequest(user,false)" type="submit" name="submit" class="btn btn-danger">Disprove</button></td>
+        </span>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+
+
+
+
+

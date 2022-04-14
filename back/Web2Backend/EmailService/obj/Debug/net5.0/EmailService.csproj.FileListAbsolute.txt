@@ -1,0 +1,12 @@
+D:\web2\web2\back\Web2Backend\EmailService\bin\Debug\net5.0\EmailService.deps.json
+D:\web2\web2\back\Web2Backend\EmailService\bin\Debug\net5.0\EmailService.dll
+D:\web2\web2\back\Web2Backend\EmailService\bin\Debug\net5.0\ref\EmailService.dll
+D:\web2\web2\back\Web2Backend\EmailService\bin\Debug\net5.0\EmailService.pdb
+D:\web2\web2\back\Web2Backend\EmailService\obj\Debug\net5.0\EmailService.csproj.AssemblyReference.cache
+D:\web2\web2\back\Web2Backend\EmailService\obj\Debug\net5.0\EmailService.GeneratedMSBuildEditorConfig.editorconfig
+D:\web2\web2\back\Web2Backend\EmailService\obj\Debug\net5.0\EmailService.AssemblyInfoInputs.cache
+D:\web2\web2\back\Web2Backend\EmailService\obj\Debug\net5.0\EmailService.AssemblyInfo.cs
+D:\web2\web2\back\Web2Backend\EmailService\obj\Debug\net5.0\EmailService.csproj.CoreCompileInputs.cache
+D:\web2\web2\back\Web2Backend\EmailService\obj\Debug\net5.0\EmailService.dll
+D:\web2\web2\back\Web2Backend\EmailService\obj\Debug\net5.0\ref\EmailService.dll
+D:\web2\web2\back\Web2Backend\EmailService\obj\Debug\net5.0\EmailService.pdb

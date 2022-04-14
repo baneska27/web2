@@ -9,11 +9,12 @@ namespace WebApplication1.Models
     public class User
     {
         [Column("Username")]
-        [Key]
+        
         [Required]
         public string Username { get; set; }
         [Column("Email")]
         [Required]
+         [Key]
         public string Email { get ; set; }
 
         [Column("Password")]
@@ -33,7 +34,14 @@ namespace WebApplication1.Models
         [Column("Slika")]
         public string Slika { get ; set ; }
 
-        public User(string username, string email, string password, string type, string firstName, string secondName, DateTime dateOfBirth, string slika)
+        [Column("Address")]
+        public string Address { get; set; }
+
+        [Column("Verified")]
+        public bool Verified { get; set; }
+
+
+        public User(string username, string email, string password, string type, string firstName, string secondName, DateTime dateOfBirth, string slika,string address, bool verified)
         {
             this.Username = username;
             this.Email = email;
@@ -43,6 +51,8 @@ namespace WebApplication1.Models
             this.SecondName = secondName;
             this.DateOfBirth = dateOfBirth;
             this.Slika = slika;
+            this.Address = address;
+            this.Verified = verified;
         }
 
     }

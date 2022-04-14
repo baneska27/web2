@@ -1,0 +1,244 @@
+
+<!--
+
+<div style="display:grid;" class="div_izmene">
+    <label>Ime</label>
+    <input type="text" name="firstName" id="firstName" [value]="userInfo?.firstName">
+    <label >Prezime</label>
+    <input type="text" [value]="userInfo?.lastName">
+    <label >Datum Rodjenja</label>
+    <input type="text" [value]="userInfo?.dateOfBirth">
+    <label >Username</label>
+    <input type="text" [value]="userInfo?.username">
+    <label >Mail</label>
+    <input type="text" [value]="userInfo?.email">
+    <label >Adresa</label>
+    <input type="text" [value]="userInfo?.address">
+    <label >Tip</label>
+    <input disabled type="text" [value]="userInfo?.type">
+    <label >Verifikovan</label>
+    <input type="text" [value]="userInfo?.verified">
+</div>
+
+
+
+-->
+
+
+
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div id="topheader" class="container">
+<div class="row flex-lg-nowrap">
+  <div class="col-12 col-lg-auto mb-3">
+   
+  </div>
+
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="e-profile">
+              <div class="row">
+                <div class="col-12 col-sm-auto mb-3">
+                  <div class="mx-auto" style="width: 140px;">
+                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                      <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{userInfo?.firstName}} {{userInfo?.secondName}}</h4>
+                    <p class="mb-0">{{userInfo?.username}}</p>
+                    <br>
+                    <div class="mt-2">
+                      <button [disabled]="option==='changePass'" class="btn btn-primary" type="button">
+                        <i class="fa fa-fw fa-camera"></i>
+                        <span>Promeni Sliku</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="text-center text-sm-right">
+                    <span  class="badge badge-secondary">{{userInfo?.type}}</span>
+                    
+                  </div>
+                </div>
+              </div>
+              <ul  class="nav nav-tabs">
+                <li (click)="changeView(true)"  class="nav-item"><a class="nav-link">Settings</a></li>
+                <li (click)="changeView(false)" class="nav-item"><a class="nav-link">Change Password</a></li>
+              </ul>
+            <div *ngIf="option==='settings'" class="tab-content pt-3">
+                <div class="tab-pane active">
+                  <form [formGroup]="registrationForm" (ngSubmit)="updateProfileInfo()" class="form">
+                    <div class="row">
+                      <div class="col">
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Ime</label>
+                              <input [value]=userInfo?.firstName formControlName="firstName" class="form-control" type="text" name="name">
+                              <div *ngIf="f['firstName'].touched && f['firstName'].invalid" class="alert alert-danger"> 
+                                <div *ngIf="f['firstName'].errors && f['firstName'].errors['minLength']"></div>
+                               Polje za ime ne moze biti prazno
+                            </div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Prezime</label>
+                              <input [value]=userInfo?.secondName formControlName="lastName" name="nekoIme" class="form-control" type="text" >
+                              <div *ngIf="f['lastName'].touched && f['lastName'].invalid" class="alert alert-danger"> 
+                                <div *ngIf="f['lastName'].errors && f['lastName'].errors['minLength']"></div>
+                               Polje za prezime ne moze biti prazno
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Username</label>
+                                <input [value]=userInfo?.username formControlName="username" class="form-control" type="text" name="name">
+                                <div *ngIf="f['username'].touched && f['username'].invalid" class="alert alert-danger"> 
+                                    <div *ngIf="f['username'].errors && f['username'].errors['minLength']"></div>
+                                   Minimalno 6 karaktera za username
+                                </div>  
+                            </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Adresa</label>
+                                <input [value]=userInfo?.address formControlName="address" class="form-control" type="text" name="username">
+                                <div *ngIf="f['address'].touched && f['address'].invalid" class="alert alert-danger"> 
+                                    <div *ngIf="f['address'].errors && f['address'].errors['minLength']"></div>
+                                   Adresa ne moze biti prazna
+                                </div>  
+                            </div>
+                            </div>
+                          </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Email</label>
+                              <input [value]=userInfo?.email formControlName="email" class="form-control" type="text">
+                              <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger"> 
+                                <div *ngIf="f['email'].errors && f['email'].errors['email']">Unesite email ispravno.</div>
+                                Polje za mejl ne moze ostati prazno
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Datum Rodjenja</label>
+                                <input [value]=userInfo?.dateOfBirth formControlName="dateOfBirth" class="form-control" type="date" [value]="userInfo?.dateOfBirth">
+                                <div *ngIf="f['dateOfBirth'].touched && f['dateOfBirth'].invalid" class="alert alert-danger"> 
+                                    <div *ngIf="f['dateOfBirth'].errors && f['dateOfBirth'].errors['minLength']"></div>
+                                   Polje za datum ne moze biti prazno
+                                </div>
+                            </div>
+                            </div>
+                          </div>
+                        
+                      </div>
+                    </div>
+                   
+                    <div class="row">
+                      <div class="col d-flex justify-content-end">
+                        <button class="btn btn-primary" [disabled]="registrationForm.invalid" type="submit">Save Changes</button>
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+
+              <div *ngIf="option!=='settings'" class="tab-content pt-3">
+                <div class="tab-pane active">
+                    <form [formGroup]="passwordForm"  (ngSubmit)="changePass()" class="form">
+                     
+                      <div class="row">
+                        <div class="col-12 col-sm-6 mb-3">
+                          <div class="mb-2"><b>Promeni Password</b></div>
+                          
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Novi Password</label>
+                                <input formControlName="password1" class="form-control" type="password">
+                                <div *ngIf="f1['password1'].touched && f1['password1'].invalid" class="alert alert-danger"> 
+                                  <div *ngIf="f1['password1'].errors && f1['password1'].errors['minLength']"></div>
+                                 Polje ne moze biti prazno
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Potvrdi Novi <span class="d-none d-xl-inline">Password</span></label>
+                                <input formControlName="password2" class="form-control" type="password"></div>
+                                <div *ngIf="f1['password2'].touched && f1['password2'].invalid" class="alert alert-danger"> 
+                                  <div *ngIf="f1['password2'].errors && f1['password2'].errors['passwordMismatch']"></div>
+                                  Ne podudaraju se passwordi
+                              </div>
+                              </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="row">
+                        <div class="col d-flex justify-content-end">
+                          <button class="btn btn-primary" [disabled]="passwordForm.invalid" type="submit">Save Changes</button>
+                        </div>
+                      </div>
+                    </form>
+  
+                  </div>
+              </div>
+
+
+
+
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-3 mb-3">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="px-xl-3">
+              <button class="btn btn-block btn-secondary">
+                <i class="fa fa-sign-out"></i>
+                <span>Logout</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script>
+    $( '#topheader .navbar-nav a' ).on('click', 
+                function () {
+        $( '#topheader .navbar-nav' ).find( 'li.active' )
+        .removeClass( 'active' );
+        $( this ).parent( 'li' ).addClass( 'active' );
+    });
+</script>

@@ -261,3 +261,17 @@ D:\web2\web2\back\Web2Backend\WebApplication1\obj\Debug\net6.0\WebApplication1.d
 D:\web2\web2\back\Web2Backend\WebApplication1\obj\Debug\net6.0\ref\WebApplication1.dll
 D:\web2\web2\back\Web2Backend\WebApplication1\obj\Debug\net6.0\WebApplication1.pdb
 D:\web2\web2\back\Web2Backend\WebApplication1\obj\Debug\net6.0\WebApplication1.genruntimeconfig.cache
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\BCrypt.Net-Next.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\EasyEncryption.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\MailKit.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\MimeKit.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\NETCore.MailKit.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\EmailService.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\EmailService.pdb
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\System.Web.Razor.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\System.Web.Helpers.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\System.Web.WebPages.dll
+D:\web2\web2\back\Web2Backend\WebApplication1\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll

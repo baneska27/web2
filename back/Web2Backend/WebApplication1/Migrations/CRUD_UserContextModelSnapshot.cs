@@ -24,18 +24,17 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.User", b =>
                 {
-                    b.Property<string>("Username")
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)")
-                        .HasColumnName("Username");
+                        .HasColumnName("Email");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Address");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2")
                         .HasColumnName("DateOfBirth");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Email");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)")
@@ -59,7 +58,16 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Type");
 
-                    b.HasKey("Username");
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Username");
+
+                    b.Property<bool>("Verified")
+                        .HasColumnType("bit")
+                        .HasColumnName("Verified");
+
+                    b.HasKey("Email");
 
                     b.ToTable("User");
                 });
