@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { User } from 'src/app/entities/user';
 import { LoginService } from 'src/app/services/login.service';
 import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -31,24 +32,28 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     let subscriber = this.loginService.loginUser(this.loginForm.get('email')?.value,this.loginForm.get('password')?.value);
-
+    console.log(subscriber);
     subscriber.subscribe({
-      next: (user: any) =>
+      next: (token : string) =>
       {
-        this.loginService.switchData(user);
-        localStorage.setItem('ime',user.firstName);
+        //this.loginService.switchData(user);
+        //console.log(token);
+        localStorage.setItem('token',token);
+
+        this.loginService.getUserDataFromDatabase(this.loginForm.get('email')?.value).subscribe({next : (user : User) =>{
+          this.loginService.switchData(user);
+        }})
         
         this.router.navigate(['home/profile']);
         
         this.toastr.success('Uspesno ste se ulogovali','Success');
 
-
-  
       },
   
-      error: () =>
+      error: (data : HttpErrorResponse) =>
       {
-                this.toastr.error('Email/Password netacni','Greska');
+              
+                this.toastr.error(data.error,'Greska');
 
       }
       

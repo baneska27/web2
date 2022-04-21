@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { User, UserWithoutPass } from '../entities/user';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { UserDTO } from '../entities/user-dto';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,public jwtHelper: JwtHelperService) { }
 
 
   userProfile : BehaviorSubject<User> = new BehaviorSubject<User>(
@@ -17,7 +20,7 @@ export class LoginService {
     username: 'invalideUsername',
     email: 'invalideMail@gmail.com',
     password: 'invalidePass',
-    type: 'admin',
+    type: 'invalidType',
     firstName : 'invalideFirstName',
     secondName : 'invalideLastName',
     dateOfBirth : new Date(),
@@ -35,14 +38,36 @@ export class LoginService {
 
   loginUser(email : string, password : string) {
 
-    let user = new User('username',email,password,'administrator','ime1','prezime1',new Date(2020,5,4),'slika','adresa',false);
+    let user = new UserDTO(email,password);
 
-
-    return this.http.post(this._loginUrl,user,{withCredentials:true});
+    console.log(user);
+    return this.http.post(this._loginUrl,user,{responseType:'text'});
     
     
 
   }
+
+  getUserDataFromDatabase(email : string){
+
+    return this.http.get<User>(this._editUrlBase+email);
+  }
+
+
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    // Check whether the token is expired and return
+    // true or false
+    
+    if(token!=null)
+    {
+      
+      return !this.jwtHelper.isTokenExpired(token);
+
+    }
+    return false;
+  }
+
+
 
   switchData(user : User){
     this.userProfile.next(user);

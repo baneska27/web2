@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -13,6 +14,7 @@ namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProizvodsController : ControllerBase
     {
         private readonly CRUD_ProizvodContext _context;
@@ -54,6 +56,8 @@ namespace WebApplication1.Controllers
         // PUT: api/Proizvods/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
+
         public async Task<IActionResult> PutProizvod(int id, Proizvod proizvod)
         {
             if (id != proizvod.Id)
@@ -85,6 +89,8 @@ namespace WebApplication1.Controllers
         // POST: api/Proizvods
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "admin")]
+
         public async Task<ActionResult<Proizvod>> PostProizvod(Proizvod proizvod)
         {
             _context.Proizvods.Add(proizvod);
@@ -95,6 +101,8 @@ namespace WebApplication1.Controllers
 
         // DELETE: api/Proizvods/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
+
         public async Task<IActionResult> DeleteProizvod(int id)
         {
             var proizvod = await _context.Proizvods.FindAsync(id);

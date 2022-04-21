@@ -1,0 +1,45 @@
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Porucilac</th>   
+        <th scope="col">Adresa</th>
+        <th scope="col">Status</th>
+
+        <th scope="col">Proizvodi</th>
+        <th scope="col">Detalji</th>
+        <th scope="col">Ukupno</th>
+        <th scope="col">Prihvati</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <ng-container *ngFor="let porudzbina of porudzbinas;index as i;">
+
+     
+      <tr>
+        <th scope="row">{{i+1}}</th>
+        <td>{{porudzbina.idKorisnika}}</td>
+
+        <td>{{porudzbina.adresa}}</td>
+        <td *ngIf="porudzbina.stanje===0">Ceka na Dostavljaca</td>
+        <td *ngIf="porudzbina.stanje===1">Dostava u toku</td>
+        <td *ngIf="porudzbina.stanje===2">Dostavljena</td>
+        <td >
+            <div *ngFor="let proizvod of porudzbina.proizvods">{{proizvod.ime}} - {{proizvod.kolicina}} * {{proizvod.cena}} ={{proizvod.kolicina*proizvod.cena}} </div>   
+        </td>
+        <td>{{porudzbina.komentar}}</td>
+        
+        
+         <!-- Modal -->
+  
+         <td>{{porudzbina.cena}}</td>
+
+  
+        <td><button class="btn btn-primary">Prihvati</button></td>
+        
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+

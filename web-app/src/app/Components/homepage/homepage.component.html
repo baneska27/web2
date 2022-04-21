@@ -5,25 +5,35 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a routerLink="/" class="nav-link">Home</a>
+        
            
         
-            <span name="ime" *ngIf="userInfo?.type==='adminnnn'">
+            <span name="ime" *ngIf="userInfo?.type==='admin'">
+              <a routerLink="/" class="nav-link">Home</a>
                 <a routerLink="home/verifikacija" class="nav-link">Verifikacija</a>
-                <a class="nav-link">Sve porudzbine</a>
-                <a class="nav-link">Dodavanje proizvoda</a>
+                <a routerLink="home/svePorudzbine" class="nav-link">Sve porudzbine</a>
+                <a routerLink="home/dodajProizvod" class="nav-link">Dodavanje proizvoda</a>
+                <a routerLink="/home/profile" class="nav-link -auto">Profil</a>   
+                <a class="nav-link" (click)="logout()">Logout</a>
+
             </span>
             
             <span *ngIf="userInfo?.type==='dostavljac'">
-                <a class="nav-link">Nove porudzbine</a>
+              <a routerLink="/" class="nav-link">Home</a>
+                <a routerLink="home/novePorudzbine" class="nav-link">Nove porudzbine</a>
                 <a class="nav-link">Moje porudzbine</a>
                 <a class="nav-link">Trenutna porudzbina</a>
+                <a routerLink="/home/profile" class="nav-link -auto">Profil</a>   
+                <a class="nav-link" (click)="logout()">Logout</a>
             </span>
         <span *ngIf="userInfo?.type==='potrosac'">
-            <a class="nav-link">Nova/Trenutna</a>
+          <a routerLink="/" class="nav-link">Home</a>
+            <a routerLink="home/novaPorudzbina" class="nav-link">Nova/Trenutna</a>
             <a class="nav-link">Prethodne porudzbine</a>
+            <a routerLink="/home/profile" class="nav-link -auto">Profil</a>   
+            <a class="nav-link" (click)="logout()">Logout</a>
         </span>
-        <a routerLink="/home/profile" class="nav-link -auto">Profil</a>   
+    
       </div>
     </div>
   </nav>

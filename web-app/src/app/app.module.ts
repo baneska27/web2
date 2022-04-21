@@ -14,9 +14,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { VerifikacijaComponent } from './Components/verifikacija/verifikacija.component';
-import { DodavanjeProizvodaComponent } from './components/dodavanje-proizvoda/dodavanje-proizvoda.component';
+import { DodavanjeProizvodaComponent } from './Components/dodavanje-proizvoda/dodavanje-proizvoda.component';
+import { NovaPorudzbinaComponent } from './Components/nova-porudzbina/nova-porudzbina.component';
+import { PorudzbinaDaljeComponent } from './Components/porudzbina-dalje/porudzbina-dalje.component';
+import { TrenutnaPorudzbinaComponent } from './Components/trenutna-porudzbina/trenutna-porudzbina.component';
+import { SvePorudzbineComponent } from './Components/sve-porudzbine/sve-porudzbine.component';
+import { MyBootstrapModalComponent } from './Components/modals/my-bootstrap-modal/my-bootstrap-modal.component';
+import { NovePorudzbineComponent } from './Components/nove-porudzbine/nove-porudzbine.component';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { DostavaComponent } from './components/dostava/dostava.component';
 
 
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +37,14 @@ import { DodavanjeProizvodaComponent } from './components/dodavanje-proizvoda/do
     HomepageComponent,
     ProfileComponent,
     VerifikacijaComponent,
-    DodavanjeProizvodaComponent
+    DodavanjeProizvodaComponent,
+    NovaPorudzbinaComponent,
+    PorudzbinaDaljeComponent,
+    TrenutnaPorudzbinaComponent,
+    SvePorudzbineComponent,
+    MyBootstrapModalComponent,
+    NovePorudzbineComponent,
+    DostavaComponent
   ],
   imports: [
     BrowserModule,
@@ -36,10 +54,18 @@ import { DodavanjeProizvodaComponent } from './components/dodavanje-proizvoda/do
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     CommonModule,
+    JwtModule.forRoot({
+      config: {
+       tokenGetter: tokenGetter,
+      allowedDomains: ["localhost:4200","localhost:44332"]
+      },
+    }),
     
  
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }

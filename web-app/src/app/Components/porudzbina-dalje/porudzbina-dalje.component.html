@@ -1,0 +1,41 @@
+<!--
+
+
+<h1 class="heading__title" style="text-align: center;" *ngIf="proizvods.length==1" style="text-align: center;" >Nice choice. Single huh?</h1>
+<h1 class="heading__title" style="text-align: center;" *ngIf="proizvods.length==2" style="text-align: center;" >That's a lot better.</h1>
+<h1 class="heading__title" style="text-align: center;"  *ngIf="proizvods.length>=3" style="text-align: center;" >Bon appétit</h1>
+-->
+<div style="align-items: center;background-color: rgba(255, 255, 0, 0.842);color:rgba(0, 0, 255, 0.486);text-align: center;" *ngFor="let proizvod of porudzbina.proizvods;index as i">
+   
+    <p class="display-1">{{i+1}} - {{porudzbina.proizvods[i].ime}}</p>
+    <p class="display-3">Sastojci:</p>
+    <p *ngFor="let sastojak of porudzbina.proizvods[i].sastojaks;let i = index" class="display-4">{{sastojak.nazivSastojka}}</p>
+    <p class="display-3">{{porudzbina.proizvods[i].kolicina}} * {{porudzbina.proizvods[i].cena}} RSD</p>
+  
+
+    <button class="btn btn-warning" (click)="decrementProizvod(porudzbina.proizvods[i].id)" type="button">Not that much</button>
+    <button class="btn btn-danger" (click)="obrisiIzKorpe(porudzbina.proizvods[i].id)" type="button">Delete</button>
+    <button class="btn btn-success" (click)="incrementProizvod(porudzbina.proizvods[i].id)" type="button">Gimme more!</button>
+
+  
+
+
+</div>
+<form (ngSubmit)="posaljiPoruzbinu()" [formGroup]="porudzbinaForm">
+
+    <div style="width: 100%;background-color: rgba(255, 255, 0, 0.842);">
+        <input formControlName="adresa" placeholder="Adresa" type="text">
+        <br>
+        <input formControlName="komentar" placeholder="Komentar" type="text">
+        <br>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="porudzbinaForm.invalid">Poruci</button>
+
+</form>
+
+
+
+
+
+<p style="background-color: rgba(255, 255, 0, 0.842);color:rgba(0, 0, 255, 0.753);text-align: center;" class="display-3">Ukupno za uplatu: {{cena}}RSD</p>
+

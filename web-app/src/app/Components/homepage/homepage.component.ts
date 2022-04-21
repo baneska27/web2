@@ -3,6 +3,7 @@ import { User } from 'src/app/entities/user';
 import { LoginService } from 'src/app/services/login.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -11,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HomepageComponent implements OnInit {
   userInfo?: User;
-  constructor(private loginService : LoginService) { }
+  constructor(private loginService : LoginService,private router : Router) { }
 
  
 
@@ -27,6 +28,14 @@ export class HomepageComponent implements OnInit {
 
    })
     
+  }
+
+  logout()
+  {
+    localStorage.removeItem("token");
+    this.loginService.switchData(new User('invalid','invalid','invalid','invalid','invalid','invalid',new Date(),'invalid','invalid',false));
+    this.router.navigate(['login']);
+
   }
 
 

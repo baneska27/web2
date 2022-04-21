@@ -5,6 +5,7 @@ import { LoginService } from './services/login.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,8 +14,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit{
 
   title = 'web-app';
-  userInfo?: User
-
+  userInfo?: User;
   constructor(private loginService : LoginService)
   {
 
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
 
+    
     
     this.loginService.userProfile.subscribe( (data) =>
     {

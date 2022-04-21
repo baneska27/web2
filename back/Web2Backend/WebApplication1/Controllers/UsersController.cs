@@ -11,24 +11,35 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
 
 namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly CRUD_UserContext _context;
-        private readonly IEmailSender _emailSender; 
+        private readonly IEmailSender _emailSender;
+        private readonly IConfigurationSection _secretKey;
 
-        public UsersController(CRUD_UserContext context,IEmailSender emailSender)
+
+        public UsersController(CRUD_UserContext context,IEmailSender emailSender, IConfiguration config)
         {
             _context = context;
             _emailSender = emailSender;
+            _secretKey = config.GetSection("SecretKey");
         }
 
         // GET: api/Users
         [HttpGet]
+        [Authorize(Roles = "admin")]
+        
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             
@@ -37,6 +48,7 @@ namespace WebApplication1.Controllers
 
 
         [HttpGet("/GetUsersNoPass")]
+        
         public IQueryable<UserWithoutPassDTO> GetUsersNoPass()
         {
             var users = from b in _context.Users
@@ -63,6 +75,7 @@ namespace WebApplication1.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
+        
         public async Task<ActionResult<User>> GetUser(string id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -143,6 +156,7 @@ namespace WebApplication1.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
@@ -168,6 +182,8 @@ namespace WebApplication1.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
+
         public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -193,41 +209,62 @@ namespace WebApplication1.Controllers
         [HttpPost("authenticate")]
         [AllowAnonymous]
 
-        public async Task<ActionResult<string>> Authenticate(User userParam) // User user
+        public async Task<ActionResult<string>> Authenticate(UserDto userParam) // User user
         {
-
 
             var user = await _context.Users.FindAsync(userParam.Email);
             
-            
-         
-
-            string hashedPass = EasyEncryption.MD5.ComputeMD5Hash(userParam.Password);
-
-            bool validPassword = BCrypt.Net.BCrypt.Verify(userParam.Password, user.Password);
-
-            
-
 
             if (user == null)
             {
                 return BadRequest(new { message = "Username or password not valid" });
+                
             }
 
-
-            
-
-            //else if(!userr.Password.Equals(user.Password))
             else
             {
-                
-                if(validPassword == false)
+                string hashedPass = EasyEncryption.MD5.ComputeMD5Hash(userParam.Password);
+                bool validPassword = validPassword = BCrypt.Net.BCrypt.Verify(userParam.Password, user.Password);
+
+
+                if (validPassword == false)
                 {
                     return BadRequest(new { message = "Username or password not valid" });
                 }
                 else
                 {
-                    return Ok(user);
+
+                    List<Claim> claims = new List<Claim>();
+                    claims.Add(new Claim(ClaimTypes.Email, userParam.Email));
+                    if(user.Type=="admin")
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, "admin"));
+                    }
+                    else if(user.Type =="dostavljac")
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, "dostavljac"));
+
+                    }
+                    else
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, "potrosac"));
+
+                    }
+                    
+
+                    SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey.Value));
+                    var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                    var tokenOptions = new JwtSecurityToken(
+                        issuer: "https://localhost:44332", //url servera koji je izdao token
+                        claims: claims, //claimovi
+                        expires: DateTime.Now.AddMinutes(20), //vazenje tokena u minutama
+                        signingCredentials: signinCredentials //kredencijali 
+                        
+                    );
+                    string tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+                    return Ok(tokenString);
+
+              
                 }
                
             }
@@ -236,6 +273,7 @@ namespace WebApplication1.Controllers
                 
             }
 
+    
 
 
         [HttpPut("pass/{id}")]
@@ -285,7 +323,10 @@ namespace WebApplication1.Controllers
 
     }
 
-
-
+    public class UserDto
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
+}
 

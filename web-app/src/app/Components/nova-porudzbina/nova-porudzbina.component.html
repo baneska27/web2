@@ -1,0 +1,38 @@
+<!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF -->
+<div *ngIf="!porudzbinaPostojiBoolean">
+  <div class="main-container">
+    <div class="heading">
+      <h1 class="heading__title">Welcome</h1>
+      <p class="heading__credits">Order food</p>
+    </div>
+    <div class="cards">
+      <div *ngFor="let proizvod of proizvods;let i = index" class="card card-1">
+        <div  class="card__icon">{{proizvod.ime}} - {{proizvod.cena}} RSD</div>
+        <h2  class="card__title"></h2>
+        <p class="card__apply">
+            <button (click)="dodajProizvod(proizvod)" class="btn btn-primary">Add</button>    
+        </p>
+      </div>
+    </div>
+  </div>
+ 
+<div *ngIf="!nastaviKupovinu()">
+  <h1 class="heading__title" style="text-align: center">Still thinking?</h1>
+</div>
+<div *ngIf="nastaviKupovinu()">
+<h1 class="heading__title" style="text-align: center;" *ngIf="proizvodiKorpa.length==1" style="text-align: center;padding-bottom: 25px" >Nice choice. Single huh?</h1>
+<h1 class="heading__title" style="text-align: center;" *ngIf="proizvodiKorpa.length==2" style="text-align: center;padding-bottom: 25px" >That's a lot better.</h1>
+<h1 class="heading__title" style="text-align: center;" *ngIf="proizvodiKorpa.length==3" style="text-align: center;padding-bottom: 25px" >Bon appétit</h1>
+<h1 class="heading__title" style="text-align: center;" *ngIf="proizvodiKorpa.length==4" style="text-align: center;padding-bottom: 25px" >Bon appétit</h1>
+<h1 class="heading__title" style="text-align: center;" *ngIf="proizvodiKorpa.length>=5" style="text-align: center;padding-bottom: 25px" >Woah!</h1>
+  <app-porudzbina-dalje></app-porudzbina-dalje>
+</div>
+<!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF --><!--IF -->
+</div>
+<!--ELSE --><!--ELSE --><!--ELSE --><!--ELSE --><!--ELSE --><!--ELSE --><!--ELSE --><!--ELSE --><!--ELSE --><!--ELSE --><!--ELSE --><!--ELSE -->
+
+
+
+  
+
+
