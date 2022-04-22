@@ -113,6 +113,13 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  logout()
+  {
+    localStorage.removeItem("token");
+    this.router.navigate(['login']);
+    window.location.reload();
+  }
+
   
 
   updateProfileInfo(){
@@ -132,7 +139,6 @@ export class ProfileComponent implements OnInit {
       next: (user: any) =>
       {
   
-        localStorage.setItem('ime',user.firstName);
         this.loginService.userProfile.next(user);
         
         this.toastr.success('Uspesno ste promenili podatke.','Success');

@@ -73,7 +73,6 @@ export class RegisterComponent implements OnInit {
       next: (user: any) =>
       {
   
-        localStorage.setItem('ime',user.firstName);
         this.router.navigate(['login']);
         
         this.toastr.success('Uspesno ste se registrovali. Ulogujte se','Success');

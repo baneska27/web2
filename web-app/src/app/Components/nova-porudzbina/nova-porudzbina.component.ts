@@ -10,6 +10,8 @@ import { ProizvodPorudzbina } from 'src/app/entities/proizvod-porudzbina';
 import { delay, timeout } from 'rxjs';
 import { User } from 'src/app/entities/user';
 import { LoginService } from 'src/app/services/login.service';
+import { DostavaService } from 'src/app/services/dostava.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-nova-porudzbina',
@@ -21,31 +23,35 @@ export class NovaPorudzbinaComponent implements OnInit {
   proizvods : Proizvod[] = [];
   user! : User;
   
-  porudzbinaPostoji! : Porudzbina;
   proizvodiKorpa : ProizvodPorudzbina[] = [];
   poruzbina : Porudzbina = new Porudzbina(this.proizvodiKorpa);
-  porudzbinaPostojiBoolean=false;
+  porudzbinaPostojiBoolean=true;
 
-  constructor(private loginServ : LoginService, private proizvodService : ProizvodService,private router : Router, private toastr : ToastrService,private porudzbinaService : PorudzbinaService) { }
+  constructor(private dostavaService : DostavaService,private loginServ : LoginService, private proizvodService : ProizvodService,private router : Router, private toastr : ToastrService,private porudzbinaService : PorudzbinaService) { }
 
   ngOnInit(): void {
-    
-    this.loginServ.userProfile.subscribe({next : (data : User) =>{
-      this.user = data;
 
-      this.porudzbinaService.dobaviMojuPorudzbinu(data.email).subscribe({next : (data)=>{
-
-        this.porudzbinaPostoji = data;
-        this.porudzbinaPostojiBoolean=true;
-      }})
-    }})
-    
     this.proizvodService.getAllProizvods().subscribe((data : Proizvod[]) =>
-   {
-    this.proizvods = data;
-    this.toastr.info("Hej, imamo sjajne ponude. Sta kazes na " + this.proizvods[this.randomNumber(0,this.proizvods.length)].ime + "?","Welcome", {timeOut:7500,closeButton:true});
-   }
-  )}
+    {
+     this.proizvods = data;
+     this.toastr.info("Hej, imamo sjajne ponude. Sta kazes na " + this.proizvods[this.randomNumber(0,this.proizvods.length)].ime + "?","Welcome", {timeOut:7500,closeButton:true});
+    }
+   )
+    
+    this.dostavaService.porudzbinaPostojiBoolean.subscribe({next : (data:boolean)=>{
+        this.porudzbinaPostojiBoolean=data;
+        
+        
+    },
+  error :(data :HttpErrorResponse) => {
+    
+   console.log("greska")
+    
+  }})
+
+  this.dostavaService.porudzbinaPostojiBoolean.next(this.porudzbinaPostojiBoolean);
+    
+}
  
 
 

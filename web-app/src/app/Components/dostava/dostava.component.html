@@ -1,1 +1,85 @@
-<p>dostava works!</p>
+
+<div *ngIf="porudzbinaPostojiBoolean">
+
+
+<h1 style="text-align: center;">Vreme do dostave {{timer$}} sekundi</h1>
+
+<div *ngIf="porudzbinaPostojiBoolean" class="container" id="template_invoice">
+   
+    <div style="justify-content: center;" class="row">
+      <div class="col-md-15">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Order summary -- Order ID # {{porudzbinaPostoji.idDostave}}</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <td><strong>Item</strong></td>
+                    <td class="text-center"><strong>Price</strong></td>
+                    <td class="text-center"><strong>Quantity</strong></td>
+                    <td class="text-right"><strong>Totals</strong></td>
+                  </tr>
+                </thead>
+                <tbody >
+                  <tr *ngFor="let proizvod of porudzbinaPostoji.proizvods">
+                    <td>{{proizvod.ime}}</td>
+                    <td class="text-center">{{proizvod.cena}}</td>
+                    <td class="text-center">{{proizvod.kolicina}}</td>
+                    <td class="text-right">{{proizvod.cena * proizvod.kolicina}}</td>
+                  </tr>
+                  <tr>
+                    <td class="no-line"></td>
+                    <td class="no-line"></td>
+                    <td class="no-line text-center"><strong>Dostava</strong></td>
+                    <td class="no-line text-right">200</td>
+                  </tr>
+                  <tr>
+                    <td class="no-line"></td>
+                    <td class="no-line"></td>
+                    <td class="no-line text-center"><strong>Total</strong></td>
+                    <td class="no-line text-right">{{porudzbinaPostoji.cena+200}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <div class="invoice-title">
+              
+            </div>
+          </div>
+         
+        
+        </div>
+        <hr>
+        <div style="justify-content: center;" class="row">
+          <div class="col-md-5">
+            <address>
+                  <strong>Shipped To:</strong><br>
+                  {{user.firstName}} {{ user.secondName}}<br>
+                  {{user.email}}<br>
+                  {{porudzbinaPostoji.adresa}}<br>
+              </address>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div>
+
+    
+
+  </div>
+
+
+  
+
+</div>

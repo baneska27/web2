@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">DostavaApp</a>
+    <a class="navbar-brand">DostavaApp</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,31 +8,31 @@
         
            
         
-            <span name="ime" *ngIf="userInfo?.type==='admin'">
-              <a routerLink="/" class="nav-link">Home</a>
-                <a routerLink="home/verifikacija" class="nav-link">Verifikacija</a>
-                <a routerLink="home/svePorudzbine" class="nav-link">Sve porudzbine</a>
-                <a routerLink="home/dodajProizvod" class="nav-link">Dodavanje proizvoda</a>
-                <a routerLink="/home/profile" class="nav-link -auto">Profil</a>   
-                <a class="nav-link" (click)="logout()">Logout</a>
+           
+              <a  *ngIf="userInfo?.type==='admin'" routerLink="/" class="nav-link">Home</a>
+                <a  *ngIf="userInfo?.type==='admin'" routerLink="home/verifikacija" class="nav-link">Verifikacija</a>
+                <a  *ngIf="userInfo?.type==='admin'" routerLink="home/svePorudzbine" class="nav-link">Sve porudzbine</a>
+                <a  *ngIf="userInfo?.type==='admin'" routerLink="home/dodajProizvod" class="nav-link">Dodavanje proizvoda</a>
+                <a  *ngIf="userInfo?.type==='admin'" routerLink="/home/profile" class="nav-link -auto">Profil</a>   
+                <a  *ngIf="userInfo?.type==='admin'" class="nav-link" (click)="logout()">Logout</a>
 
-            </span>
+          
             
-            <span *ngIf="userInfo?.type==='dostavljac'">
-              <a routerLink="/" class="nav-link">Home</a>
-                <a routerLink="home/novePorudzbine" class="nav-link">Nove porudzbine</a>
-                <a class="nav-link">Moje porudzbine</a>
-                <a class="nav-link">Trenutna porudzbina</a>
-                <a routerLink="/home/profile" class="nav-link -auto">Profil</a>   
-                <a class="nav-link" (click)="logout()">Logout</a>
-            </span>
-        <span *ngIf="userInfo?.type==='potrosac'">
-          <a routerLink="/" class="nav-link">Home</a>
-            <a routerLink="home/novaPorudzbina" class="nav-link">Nova/Trenutna</a>
-            <a class="nav-link">Prethodne porudzbine</a>
-            <a routerLink="/home/profile" class="nav-link -auto">Profil</a>   
-            <a class="nav-link" (click)="logout()">Logout</a>
-        </span>
+          
+                <a *ngIf="userInfo?.type==='dostavljac'" routerLink="/" class="nav-link">Home</a>
+                <a *ngIf="userInfo?.type==='dostavljac'" routerLink="home/novePorudzbine" class="nav-link">Nove porudzbine</a>
+                <a *ngIf="userInfo?.type==='dostavljac'" class="nav-link">Moje porudzbine</a>
+                <a *ngIf="userInfo?.type==='dostavljac'" class="nav-link">Trenutna porudzbina</a>
+                <a *ngIf="userInfo?.type==='dostavljac'" routerLink="/home/profile" class="nav-link -auto">Profil</a>   
+                <a *ngIf="userInfo?.type==='dostavljac'" class="nav-link" (click)="logout()">Logout</a>
+            
+      
+            <a *ngIf="userInfo?.type==='potrosac'" routerLink="/" class="nav-link">Home</a>
+            <a *ngIf="userInfo?.type==='potrosac'" routerLink="home/novaPorudzbina" class="nav-link">Nova/Trenutna</a>
+            <a *ngIf="userInfo?.type==='potrosac'" class="nav-link">Prethodne porudzbine</a>
+            <a *ngIf="userInfo?.type==='potrosac'" routerLink="/home/profile" class="nav-link -auto">Profil</a>   
+            <a *ngIf="userInfo?.type==='potrosac'" class="nav-link" (click)="logout()">Logout</a>
+       
     
       </div>
     </div>

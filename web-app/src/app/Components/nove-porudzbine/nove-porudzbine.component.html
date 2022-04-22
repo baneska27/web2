@@ -1,4 +1,4 @@
-<table class="table table-hover">
+<table *ngIf="!zauzet" class="table table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -36,10 +36,14 @@
          <td>{{porudzbina.cena}}</td>
 
   
-        <td><button class="btn btn-primary">Prihvati</button></td>
+        <td><button (click)="preuzmiDostavu(porudzbina,1)" class="btn btn-primary">Prihvati</button></td>
         
       </tr>
     </ng-container>
     </tbody>
   </table>
 
+  <div *ngIf="zauzet">
+    <button (click)="probaClick()">Zapocni</button>
+    Izvrsite prvo preuzetu dostavu. {{timer$}}
+  </div>

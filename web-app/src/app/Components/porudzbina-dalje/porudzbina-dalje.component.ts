@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Porudzbina } from 'src/app/entities/porudzbina';
 import { Proizvod } from 'src/app/entities/proizvod';
@@ -33,7 +34,7 @@ export class PorudzbinaDaljeComponent implements OnInit {
 
 
 
-  constructor(private toastr : ToastrService,private proizvodService : ProizvodService,public porudzbinaService : PorudzbinaService, private loginService : LoginService) { }
+  constructor(private router : Router,private toastr : ToastrService,private proizvodService : ProizvodService,public porudzbinaService : PorudzbinaService, private loginService : LoginService) { }
 
   ngOnInit(): void {
     //this.proizvodService.proizvodsKorpa.subscribe(data => this.proizvods = data);  
@@ -94,6 +95,7 @@ export class PorudzbinaDaljeComponent implements OnInit {
     this.porudzbinaService.postPoruzbina(this.porudzbina).subscribe({
       next: () => {
         this.toastr.success("Uspesno ste porucili proizvode.","Success");
+        window.location.reload();
       },
       error:() =>
       {

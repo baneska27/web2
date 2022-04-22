@@ -22,7 +22,7 @@ import { SvePorudzbineComponent } from './Components/sve-porudzbine/sve-porudzbi
 import { MyBootstrapModalComponent } from './Components/modals/my-bootstrap-modal/my-bootstrap-modal.component';
 import { NovePorudzbineComponent } from './Components/nove-porudzbine/nove-porudzbine.component';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
-import { DostavaComponent } from './components/dostava/dostava.component';
+import { DostavaComponent } from './Components/dostava/dostava.component';
 
 
 export function tokenGetter() {

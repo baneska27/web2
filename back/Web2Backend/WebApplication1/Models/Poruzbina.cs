@@ -65,5 +65,10 @@ namespace WebApplication1.Models
         [Column("StanjeDostave")]
         public StanjeDostave Stanje { get; set; }
 
+
+        [Column("Dostavljac")]
+
+        public string Dostavljac { get; set; }
+
     }
 }

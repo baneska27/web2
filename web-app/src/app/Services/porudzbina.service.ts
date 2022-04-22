@@ -28,6 +28,10 @@ export class PorudzbinaService {
    
   }
 
+  preuzmiDostavu(porudzbina : Porudzbina){
+    return this.http.put((this.baseUrl+"/"+porudzbina.idDostave),porudzbina);
+  }
+
   updateCena(porudzbina : Porudzbina)
   {
     let cena=0;
@@ -67,14 +71,6 @@ export class PorudzbinaService {
     return this.http.get<Porudzbina[]>('https://localhost:44332/zaDostavu');
   }
 
-  dobaviMojuPorudzbinu(idKorisnika : string)
-  {
-    let params = new HttpParams().set('username',idKorisnika);
-    return this.http.get<Porudzbina>("https://localhost:44332/dobaviMoju",{params:params});
-  }
-
  
-
-  
 
 }

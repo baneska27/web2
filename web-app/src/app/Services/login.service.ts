@@ -40,17 +40,14 @@ export class LoginService {
 
     let user = new UserDTO(email,password);
 
-    console.log(user);
+  
     return this.http.post(this._loginUrl,user,{responseType:'text'});
     
     
 
   }
 
-  getUserDataFromDatabase(email : string){
-
-    return this.http.get<User>(this._editUrlBase+email);
-  }
+  
 
 
   public isAuthenticated(): boolean {
@@ -67,7 +64,10 @@ export class LoginService {
     return false;
   }
 
-
+  refreshUser()
+  {
+    return this.http.get<User>('https://localhost:44332/api/Users/refreshUser');
+  }
 
   switchData(user : User){
     this.userProfile.next(user);

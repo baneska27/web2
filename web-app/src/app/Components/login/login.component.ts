@@ -40,11 +40,11 @@ export class LoginComponent implements OnInit {
         //console.log(token);
         localStorage.setItem('token',token);
 
-        this.loginService.getUserDataFromDatabase(this.loginForm.get('email')?.value).subscribe({next : (user : User) =>{
+        this.loginService.refreshUser().subscribe({next : (user:User) =>{
           this.loginService.switchData(user);
         }})
         
-        this.router.navigate(['home/profile']);
+        this.router.navigate(['']);
         
         this.toastr.success('Uspesno ste se ulogovali','Success');
 

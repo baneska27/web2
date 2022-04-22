@@ -33,8 +33,8 @@ export class HomepageComponent implements OnInit {
   logout()
   {
     localStorage.removeItem("token");
-    this.loginService.switchData(new User('invalid','invalid','invalid','invalid','invalid','invalid',new Date(),'invalid','invalid',false));
-    this.router.navigate(['login']);
+    //this.loginService.switchData(new User('invalid','invalid','invalid','invalid','invalid','invalid',new Date(),'invalid','invalid',false));
+    window.location.reload();
 
   }
 

@@ -1,4 +1,3 @@
-<p>dodavanje-proizvoda works!</p>
 
 <!--
 
@@ -13,14 +12,16 @@
 
     </div>
 -->
+    <div style="justify-content: center;">
 
+    
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
       <div class="input-field">
           <input matInput type="text" name="ime"
              placeholder="ImeProizovda" formControlName="ime">
       </div>
       <div class="input-field">
-          <input matInput type="number"
+          <input min="0" matInput type="number"
              placeholder="Cena" formControlName="cena">
       </div>
       <div *ngFor="let control of  rolesFieldAsFormArray.controls ;let i = index;" formArrayName='sastojaks' >
@@ -32,13 +33,13 @@
               <button class="button btn-danger" type="button" (click)="remove(i)" >Remove</button>
           </div>
       </div>
-      <button type="button"  class="button btn-primary" (click)="addControl()" > Dodaj Sastojak</button> <br>
-    <button class="button btn-primary" (click)="formValue()" type="submit" [disabled]="form.invalid">
-      Login
+      <button type="button"  class="btn btn-warning" (click)="addControl()" > Dodaj Jos Sastojaka</button> <br>
+    <button class="btn btn-warning" (click)="formValue()" type="submit" [disabled]="form.invalid">
+      Submit
     </button>
    
   </form>
-
+</div>
  
 
   <!--

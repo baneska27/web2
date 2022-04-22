@@ -1,10 +1,124 @@
 
 <body>
-    <p  class="display-2" style="text-align:center;color:white">Welcome</p>
 
-    <div class="buttons btn-toolbar">
-        <button routerLink="/login" name="submit" class="action_btn btn btn-dark">Login</button>
-        <button name="submit" class=" action_btn cancel btn btn-dark" routerLink="/register" >Register</button>
+    <div *ngIf="user!==undefined && user.type==='admin'">
+
+        <p class="display-1">Welcome</p>
+<div class="flip">
+   
+    <div class="front" style="background-image: url(https://spng.subpng.com/20180316/dcq/kisspng-check-mark-computer-icons-red-clip-art-blue-check-mark-5aab5ca6656ce4.9088899715211798144155.jpg)">
+       <h1 class="text-shadow">Verifikacija</h1>
     </div>
+    <div class="back">
+       <h2> <a routerLink="home/verifikacija">
+        Verifikacija
+    </a></h2>
+       <p>Ovde vidite sve korisnike i verifikujete dostavljace</p>
+    </div>
+</div>
+<div class="flip">
+    <div class="front" style="background-image: url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60)">
+       <h1 class="text-shadow">Sve Porudzbine</h1>
+    </div>
+    <div class="back">
+       <h2><a routerLink="home/svePorudzbine">Sve Porudzbine</a></h2>
+       <p>Ovde imate uvid svih porudzbina do sada</p>
+    </div>
+</div>
+<div class="flip">
+    <div class="front" style="background-image: url(https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8N3x8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60)">
+       <h1 class="text-shadow">Dodavanje proizvoda</h1>
+    </div>
+    <div class="back">
+       <h2><a routerLink="home/dodajProizvod">Dodavanje proizvoda</a></h2>
+       <p>Ovde dodajete proizvode koji ce se prodavati</p>
+    </div>
+</div>
+
+<br>
+<br>
+
+<!-- vertical -->
+  
+
+<div class="flip flip-vertical">
+    <div class="front" style="background-image: url(https://images.unsplash.com/photo-1537511446984-935f663eb1f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)">
+       <h1 class="text-shadow">Profil</h1>
+    </div>
+    <div class="back">
+       <h2><a routerLink="home/profile">Profil</a></h2>
+       <p>Menjajte podatke profila</p>
+    </div>
+</div>
+<div class="flip flip-vertical">
+    <div class="front" style="background-image: url(https://freepikpsd.com/file/2019/10/logout-button-png-3-1-Transparent-Images.png)">
+       <h1 class="text-shadow">Logout</h1>
+    </div>
+    <div class="back">
+       <h2><a (click)="logout()">Logout</a></h2>
+       <p>Dovidjenja</p>
+    </div>
+</div>
+
+</div>
+
+
+<div *ngIf="user!==undefined && user.type==='potrosac'">
+
+    <p class="display-1">Welcome</p>
+    <div class="flip">
+       
+        <div class="front" style="background-image: url(https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60)">
+           <h1 class="text-shadow">Poruci</h1>
+        </div>
+        <div class="back">
+           <h2> <a routerLink="home/novaPorudzbina">
+            Nova Porudzbina
+        </a></h2>
+           <p>Klikom idete na stranicu za porucivanje</p>
+        </div>
+    </div>
+    <div class="flip">
+        <div class="front" style="background-image: url(https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60)">
+           <h1 class="text-shadow">Sve Porudzbine</h1>
+        </div>
+        <div class="back">
+           <h2><a routerLink="home/svePorudzbine">Sve Porudzbine</a></h2>
+           <p>Ovde imate uvid svih porudzbina do sada</p>
+        </div>
+    </div>
+  
     
+    <br>
+    <br>
+    
+    <!-- vertical -->
+      
+    
+    <div class="flip flip-vertical">
+        <div class="front" style="background-image: url(https://images.unsplash.com/photo-1537511446984-935f663eb1f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)">
+           <h1 class="text-shadow">Profil</h1>
+        </div>
+        <div class="back">
+           <h2><a routerLink="home/profile">Profil</a></h2>
+           <p>Menjajte podatke profila</p>
+        </div>
+    </div>
+    <div class="flip flip-vertical">
+        <div class="front" style="background-image: url(https://freepikpsd.com/file/2019/10/logout-button-png-3-1-Transparent-Images.png)">
+           <h1 class="text-shadow">Logout</h1>
+        </div>
+        <div class="back">
+           <h2><a (click)="logout()">Logout</a></h2>
+           <p>Dovidjenja</p>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+
 </body>

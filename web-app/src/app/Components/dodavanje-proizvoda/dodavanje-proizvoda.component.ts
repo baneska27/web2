@@ -28,7 +28,7 @@ export class DodavanjeProizvodaComponent implements OnInit {
           validators: [Validators.required],
         },
       ],
-      cena: ['', [Validators.required]],
+      cena: ['', [Validators.required,Validators.min(0)]],
       sastojaks: this.fb.array([]),
     });
   }

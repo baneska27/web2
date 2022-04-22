@@ -47,6 +47,42 @@ namespace WebApplication1.Controllers
         }
 
 
+        [HttpGet("refreshUser")]
+        
+        public async Task<ActionResult<UserWithoutPassDTO>> GetUser()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            if(identity==null)
+            {
+                return Unauthorized();
+            }
+
+            string id = identity.FindFirst(ClaimTypes.Email).Value;
+            var user1 = await _context.Users.FindAsync(id);
+
+            UserWithoutPassDTO user = new UserWithoutPassDTO()
+            {
+                Address = user1.Address,
+                Username = user1.Username,
+                Email = user1.Email,
+                DateOfBirth = user1.DateOfBirth,
+                FirstName = user1.FirstName,
+                SecondName = user1.SecondName,
+                Slika = user1.Slika,
+                Verified = user1.Verified,
+                Type = user1.Type
+            };
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
+
         [HttpGet("/GetUsersNoPass")]
         
         public IQueryable<UserWithoutPassDTO> GetUsersNoPass()

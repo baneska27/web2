@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { User } from './entities/user';
 import { LoginService } from './services/login.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit{
 
   title = 'web-app';
   userInfo?: User;
-  constructor(private loginService : LoginService)
+  constructor(private router : Router,private toastr : ToastrService,private loginService : LoginService)
   {
 
   }
@@ -23,7 +24,15 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
 
-    
+    this.loginService.refreshUser().subscribe({next : (data:any) =>{
+
+      this.userInfo = data;
+      this.loginService.userProfile.next(data);
+    },
+  error : ()=>{
+  
+    this.router.navigate(["/login"]);
+  }})
     
     this.loginService.userProfile.subscribe( (data) =>
     {
@@ -31,6 +40,8 @@ export class AppComponent implements OnInit{
       this.userInfo= data;
     })
   }
+
+  
  
 }
 
