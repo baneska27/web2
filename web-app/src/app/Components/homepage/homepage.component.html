@@ -21,15 +21,15 @@
           
                 <a *ngIf="userInfo?.type==='dostavljac'" routerLink="/" class="nav-link">Home</a>
                 <a *ngIf="userInfo?.type==='dostavljac'" routerLink="home/novePorudzbine" class="nav-link">Nove porudzbine</a>
-                <a *ngIf="userInfo?.type==='dostavljac'" class="nav-link">Moje porudzbine</a>
-                <a *ngIf="userInfo?.type==='dostavljac'" class="nav-link">Trenutna porudzbina</a>
+                <a *ngIf="userInfo?.type==='dostavljac'" routerLink="home/mojePorudzbine" class="nav-link">Moje porudzbine</a>
+                <a *ngIf="userInfo?.type==='dostavljac'" routerLink="/home/trenutnaPorudzbina" class="nav-link">Trenutna porudzbina</a>
                 <a *ngIf="userInfo?.type==='dostavljac'" routerLink="/home/profile" class="nav-link -auto">Profil</a>   
                 <a *ngIf="userInfo?.type==='dostavljac'" class="nav-link" (click)="logout()">Logout</a>
             
       
             <a *ngIf="userInfo?.type==='potrosac'" routerLink="/" class="nav-link">Home</a>
             <a *ngIf="userInfo?.type==='potrosac'" routerLink="home/novaPorudzbina" class="nav-link">Nova/Trenutna</a>
-            <a *ngIf="userInfo?.type==='potrosac'" class="nav-link">Prethodne porudzbine</a>
+            <a *ngIf="userInfo?.type==='potrosac'" routerLink="home/mojePorudzbine" class="nav-link">Prethodne porudzbine</a>
             <a *ngIf="userInfo?.type==='potrosac'" routerLink="/home/profile" class="nav-link -auto">Profil</a>   
             <a *ngIf="userInfo?.type==='potrosac'" class="nav-link" (click)="logout()">Logout</a>
        

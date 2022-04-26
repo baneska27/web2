@@ -65,7 +65,7 @@ namespace WebApplication1
             services.AddDbContext<CRUD_UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CRUD_UserContext")));
             services.AddDbContext<CRUD_ProizvodContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CRUD_UserContext")));
             services.AddDbContext<CRUD_PorudzbinaContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CRUD_UserContext")));
-
+            services.AddDbContext<CRUD_SlikaContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CRUD_UserContext")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication1", Version = "v1" });

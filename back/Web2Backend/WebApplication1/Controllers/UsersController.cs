@@ -69,7 +69,7 @@ namespace WebApplication1.Controllers
                 DateOfBirth = user1.DateOfBirth,
                 FirstName = user1.FirstName,
                 SecondName = user1.SecondName,
-                Slika = user1.Slika,
+               
                 Verified = user1.Verified,
                 Type = user1.Type
             };
@@ -96,7 +96,7 @@ namespace WebApplication1.Controllers
                             DateOfBirth = b.DateOfBirth,
                             FirstName = b.FirstName,
                             SecondName = b.SecondName,
-                            Slika = b.Slika,
+                          
                             Verified = b.Verified,
                             Type = b.Type
 
@@ -147,7 +147,6 @@ namespace WebApplication1.Controllers
             user.FirstName = userParam.FirstName;
             user.SecondName = userParam.SecondName;
             user.DateOfBirth = userParam.DateOfBirth;
-            user.Slika = userParam.Slika;
             user.Address = userParam.Address;
             user.Verified = userParam.Verified;
 
@@ -195,6 +194,8 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+          
+
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             _context.Users.Add(user);
             try

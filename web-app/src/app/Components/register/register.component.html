@@ -65,8 +65,9 @@
       </select>
     </div>
     <div class="form-group col-15">
-        <label for="inputAdress">Slika</label>
-        <input placeholder="Where do you live?" type="text" class="form-control" id="inputAdress">
+        <label for="file">Slika</label>
+        <input id="file" (change)="onFileSelected($event)" type="file">
+        
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">

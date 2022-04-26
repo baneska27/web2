@@ -11,6 +11,9 @@ import { RegisterService } from 'src/app/services/register.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+  
+
   registrationForm = new FormGroup({
 
     email : new FormControl('',[Validators.required,Validators.email]),
@@ -59,10 +62,8 @@ export class RegisterComponent implements OnInit {
     this.registrationForm.get('firstName')?.value,
     this.registrationForm.get('lastName')?.value,
     this.registrationForm.get('DateOfBirth')?.value,
-    "slika",
     this.registrationForm.get('address')?.value,this.verified
     ));
-    
      console.log( this.registrationForm.get('password2')?.value,
      this.registrationForm.get('tip')?.value,
      this.registrationForm.get('firstName')?.value,
@@ -72,10 +73,17 @@ export class RegisterComponent implements OnInit {
     subscriber.subscribe({
       next: (user: any) =>
       {
-  
-        this.router.navigate(['login']);
+        const filedata = new FormData();
         
-        this.toastr.success('Uspesno ste se registrovali. Ulogujte se','Success');
+        filedata.append(this.selectedFile.name,this.selectedFile);
+        filedata.append("id",this.registrationForm.get('email')?.value);
+        this.registrationService.uploadPhoto(filedata).subscribe({next : () => {
+          this.router.navigate(['login']);
+        
+          this.toastr.success('Uspesno ste se registrovali. Ulogujte se','Success');
+        }})
+  
+      
 
 
   
@@ -92,6 +100,16 @@ export class RegisterComponent implements OnInit {
 
 
   }
+
+
+  selectedFile! : File
+  onFileSelected(event : any)
+  {
+    this.selectedFile = event.target.files[0];
+
+  }
+
+
 
   
  private passwordMatch(password: string, confirmPassword: string) {

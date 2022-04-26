@@ -31,8 +31,7 @@ namespace WebApplication1.Models
         [Column("DateOfBirth")]
         public DateTime DateOfBirth { get ; set; }
 
-        [Column("Slika")]
-        public string Slika { get ; set ; }
+
 
         [Column("Address")]
         public string Address { get; set; }
@@ -41,7 +40,7 @@ namespace WebApplication1.Models
         public bool Verified { get; set; }
 
 
-        public User(string username, string email, string password, string type, string firstName, string secondName, DateTime dateOfBirth, string slika,string address, bool verified)
+        public User(string username, string email, string password, string type, string firstName, string secondName, DateTime dateOfBirth,string address, bool verified)
         {
             this.Username = username;
             this.Email = email;
@@ -50,7 +49,6 @@ namespace WebApplication1.Models
             this.FirstName = firstName;
             this.SecondName = secondName;
             this.DateOfBirth = dateOfBirth;
-            this.Slika = slika;
             this.Address = address;
             this.Verified = verified;
         }

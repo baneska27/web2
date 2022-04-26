@@ -4,6 +4,7 @@ import { DodavanjeProizvodaComponent } from './Components/dodavanje-proizvoda/do
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { InitPageComponent } from './Components/init-page/init-page.component';
 import { LoginComponent } from './Components/login/login.component';
+import { MojeComponent } from './Components/moje/moje.component';
 import { NovaPorudzbinaComponent } from './Components/nova-porudzbina/nova-porudzbina.component';
 import { NovePorudzbineComponent } from './Components/nove-porudzbine/nove-porudzbine.component';
 import { ProfileComponent } from './Components/profile/profile.component';
@@ -60,6 +61,11 @@ const routes: Routes = [
   {
     path:'home/novePorudzbine',
     component : NovePorudzbineComponent,
+    canActivate:[AuthGuardService]
+  },
+  {
+    path:'home/mojePorudzbine',
+    component:MojeComponent,
     canActivate:[AuthGuardService]
   }
 

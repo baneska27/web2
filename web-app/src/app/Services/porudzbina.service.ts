@@ -71,6 +71,11 @@ export class PorudzbinaService {
     return this.http.get<Porudzbina[]>('https://localhost:44332/zaDostavu');
   }
 
+  dobaviMoje()
+  {
+    return this.http.get<Porudzbina[]>("https://localhost:44332/api/Poruzbinas/sveMoje");
+  }
+
  
 
 }

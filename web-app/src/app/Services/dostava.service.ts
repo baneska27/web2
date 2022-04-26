@@ -31,7 +31,7 @@ export class DostavaService {
 
  
   startTimer() {
-    this.timerSub && this.timerSub.unsubscribe();
+   // this.timerSub && this.timerSub.unsubscribe();
     this.timer$ = timer(0, 1000).pipe(
       map(i => {
         console.log(this.time - i);

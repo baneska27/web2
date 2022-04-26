@@ -45,7 +45,7 @@
                 <div class="col-12 col-sm-auto mb-3">
                   <div class="mx-auto" style="width: 140px;">
                     <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
-                      <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                      <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;"><img width="140" height="140" src="{{'data:image/jpg;base64,' + slika.data}}" /></span>
                     </div>
                   </div>
                 </div>
@@ -55,10 +55,7 @@
                     <p class="mb-0">{{userInfo?.username}}</p>
                     <br>
                     <div class="mt-2">
-                      <button [disabled]="option==='changePass'" class="btn btn-primary" type="button">
-                        <i class="fa fa-fw fa-camera"></i>
-                        <span>Promeni Sliku</span>
-                      </button>
+                      <input style="size: 40;" value="Promeni Sliku" id="file" (change)="promeniSliku($event)" type="file">
                     </div>
                   </div>
                   <div class="text-center text-sm-right">

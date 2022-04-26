@@ -23,6 +23,8 @@ import { MyBootstrapModalComponent } from './Components/modals/my-bootstrap-moda
 import { NovePorudzbineComponent } from './Components/nove-porudzbine/nove-porudzbine.component';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { DostavaComponent } from './Components/dostava/dostava.component';
+import { MojeComponent } from './Components/moje/moje.component';
+import { SlikaRegistrationComponent } from './Components/slika-registration/slika-registration.component';
 
 
 export function tokenGetter() {
@@ -44,7 +46,9 @@ export function tokenGetter() {
     SvePorudzbineComponent,
     MyBootstrapModalComponent,
     NovePorudzbineComponent,
-    DostavaComponent
+    DostavaComponent,
+    MojeComponent,
+    SlikaRegistrationComponent
   ],
   imports: [
     BrowserModule,

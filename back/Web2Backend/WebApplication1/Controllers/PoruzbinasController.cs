@@ -26,7 +26,8 @@ namespace WebApplication1.Controllers
         // GET: api/Poruzbinas
         
         [HttpGet]
-        [Authorize(Roles ="admin")]
+        //[Authorize(Roles ="admin")]
+        [AllowAnonymous]
       
         public async Task<ActionResult<IEnumerable<Poruzbina>>> GetPoruzbinas()
         {
@@ -140,6 +141,52 @@ namespace WebApplication1.Controllers
         }
 
 
+        [HttpGet("sveMoje")]
+        public async Task<ActionResult<IEnumerable<Poruzbina>>> sveMoje()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            if (identity == null)
+            {
+                return Unauthorized();
+            }
+
+
+
+            string role = identity.FindFirst(ClaimTypes.Role).Value;
+            string username = identity.FindFirst(ClaimTypes.Email).Value;
+
+           
+
+            if (role == "potrosac")
+            {
+                var porudzbinePotrosac = await _context.Poruzbinas.Where(t => t.IdKorisnika == username).ToListAsync();
+                if(porudzbinePotrosac == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return porudzbinePotrosac;
+                }
+            }
+
+            var porudzbineDostavljac = await _context.Poruzbinas.Where(t => t.Dostavljac == username).ToListAsync();
+            
+            //var porudzbina = await _context.Poruzbinas.Where(t => t.IdKorisnika == username && t.Stanje == StanjeDostave.waiting).FirstOrDefault();
+
+            if (porudzbineDostavljac == null)
+            {
+                return NotFound();
+            }
+
+            return porudzbineDostavljac;
+        }
+
+
+
+
+
         [HttpGet("/dobaviMoju")]
        
         public async Task<ActionResult<Poruzbina>> dobaviMoju()
@@ -151,11 +198,22 @@ namespace WebApplication1.Controllers
                 return Unauthorized();
             }
 
-            
-         
 
+
+            string role = identity.FindFirst(ClaimTypes.Role).Value;
             string username = identity.FindFirst(ClaimTypes.Email).Value;
-            var porudzbina = await _context.Poruzbinas.SingleOrDefaultAsync(t => t.IdKorisnika == username && t.Stanje == StanjeDostave.waiting || t.IdKorisnika == username && t.Stanje == StanjeDostave.dispatching);
+
+            var porudzbina = new Poruzbina();
+            
+            if(role=="potrosac")
+            {
+                porudzbina = await _context.Poruzbinas.SingleOrDefaultAsync(t => t.IdKorisnika == username && t.Stanje == StanjeDostave.waiting || t.IdKorisnika == username && t.Stanje == StanjeDostave.dispatching);
+
+            }
+            else
+            {
+                 porudzbina = await _context.Poruzbinas.SingleOrDefaultAsync(t => t.Dostavljac == username && t.Stanje == StanjeDostave.dispatching);
+            }
             //var porudzbina = await _context.Poruzbinas.Where(t => t.IdKorisnika == username && t.Stanje == StanjeDostave.waiting).FirstOrDefault();
 
             if (porudzbina == null)
@@ -224,6 +282,7 @@ namespace WebApplication1.Controllers
 
         // DELETE: api/Poruzbinas/5
         [HttpDelete("{id}")]
+        [AllowAnonymous]
         
         public async Task<IActionResult> DeletePoruzbina(int id)
         {

@@ -54,8 +54,9 @@ export class NovePorudzbineComponent implements OnInit {
     this.porudzbinaService.preuzmiDostavu(porudzbina).subscribe({
       next : () =>  {
         this.toastr.success("Uspesno te preuzeli dostavu","Success");
-        //this.dostavaService.startTimer();
-        this.router.navigate(["/trenutnaPorudzbina"]);
+        this.dostavaService.startTimer();
+        this.router.navigate(["home/trenutnaPorudzbina"]);
+        
         console.log("Izvrsio fju");
       }
     })

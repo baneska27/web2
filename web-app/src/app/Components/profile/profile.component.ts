@@ -3,11 +3,14 @@ import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 
 import { User } from 'src/app/entities/user';
 import { LoginService } from 'src/app/services/login.service';
 import { RegisterService } from 'src/app/services/register.service';
+import { Slika } from 'src/app/entities/slika';
 
 @Component({
   selector: 'app-profile',
@@ -16,12 +19,17 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class ProfileComponent implements OnInit {
   userInfo?: User;
-  constructor(private router : Router,private toastr : ToastrService, private fb : FormBuilder, private cdRef:ChangeDetectorRef, private loginService : LoginService, private registerService : RegisterService) { }
+  constructor(private _sanitizer: DomSanitizer,private router : Router,private toastr : ToastrService, private fb : FormBuilder, private cdRef:ChangeDetectorRef, private loginService : LoginService, private registerService : RegisterService) { }
   option ="settings";
   ngOnInit(): void {
+
+    
    this.loadUser();
-  
+   
+   
   }
+
+slika : Slika = new Slika("54","aa");
 
   registrationForm = new FormGroup({
     
@@ -64,10 +72,12 @@ export class ProfileComponent implements OnInit {
   {
     this.loginService.userProfile.subscribe((data) =>
     {
-      
+     
     this.userInfo = data;
+   
     this.cdRef.detectChanges(); //pitanje za konsultacije
-    
+    this.loginService.getPhoto().subscribe(data => this.slika = data) 
+    console.log(this.slika);
     this.registrationForm.patchValue({
       firstName : data.firstName,
       lastName : data.secondName,
@@ -84,8 +94,17 @@ export class ProfileComponent implements OnInit {
    })
   }
 
- 
-  
+  selectedFile! : File;
+  promeniSliku(event : any)
+  {
+    console.log("usao sam!");
+    this.selectedFile = event.target.files[0];
+    const filedata = new FormData();
+        
+    filedata.append(this.selectedFile.name,this.selectedFile);
+    this.loginService.changePhoto(filedata).subscribe(data => window.location.reload())
+
+  }
 
   changePass(){
     let subscriber = this.loginService.changePass(this.passwordForm.get('password2')?.value);
@@ -129,7 +148,7 @@ export class ProfileComponent implements OnInit {
     this.registrationForm.get('firstName')?.value,
     this.registrationForm.get('lastName')?.value,
     this.registrationForm.get('dateOfBirth')?.value,
-    "slika",
+    
     this.registrationForm.get('address')?.value,this.userInfo?.verified || false
     ));
     
