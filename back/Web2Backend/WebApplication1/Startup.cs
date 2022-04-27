@@ -82,7 +82,7 @@ namespace WebApplication1
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication1 v1"));
             }
 
-            app.UseHttpsRedirection();
+            
 
             app.UseRouting();
 
@@ -92,8 +92,10 @@ namespace WebApplication1
             app.UseCors(x => x
               .AllowAnyMethod()
               .AllowAnyHeader()
-              .SetIsOriginAllowed(origin => true) // allow any origin
-              .AllowCredentials()); // allow credentials
+              .AllowAnyOrigin()); // allow any origin
+                                  // allow credentials
+
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

@@ -199,7 +199,7 @@ namespace WebApplication1.Controllers
             }
 
 
-
+           
             string role = identity.FindFirst(ClaimTypes.Role).Value;
             string username = identity.FindFirst(ClaimTypes.Email).Value;
 

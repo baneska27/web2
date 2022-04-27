@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { UserDTO } from '../entities/user-dto';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Slika } from '../entities/slika';
+import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -94,5 +95,9 @@ export class LoginService {
   {
     
       return this.http.put(this.photosUrl,formData);
+  }
+
+  externalLogin(formData : any){
+    return this.http.post("https://localhost:44332/api/Users/SocialLogin",formData);
   }
 }

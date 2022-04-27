@@ -25,7 +25,7 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { DostavaComponent } from './Components/dostava/dostava.component';
 import { MojeComponent } from './Components/moje/moje.component';
 import { SlikaRegistrationComponent } from './Components/slika-registration/slika-registration.component';
-
+import {SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider} from 'angularx-social-login';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -48,10 +48,13 @@ export function tokenGetter() {
     NovePorudzbineComponent,
     DostavaComponent,
     MojeComponent,
-    SlikaRegistrationComponent
+    SlikaRegistrationComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
+    SocialLoginModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -67,7 +70,26 @@ export function tokenGetter() {
     
  
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '302765754629-oc3sio48f60l1em9seksu75k7bu2cun0.apps.googleusercontent.com'
+            )
+            
+          }
+        ]
+      } as SocialAuthServiceConfig
+    }
+
+
+   
+  ], 
   bootstrap: [AppComponent]
 })
 
